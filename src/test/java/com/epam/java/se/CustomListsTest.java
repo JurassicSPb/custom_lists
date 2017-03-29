@@ -144,6 +144,30 @@ public class CustomListsTest {
 
         assertFalse(list.remove("sadasdasd"));
     }
+    @Test
+    public void testThatWeCanSetNewElementOnPosition() throws Exception {
+        fillList();
+
+        list.set(2, "bbbb");
+
+        assertThat(list.get(2), is("bbbb"));
+    }
+
+    @Test
+    public void testThatSetMethodReturnsPreviousValue() throws Exception {
+
+    }
+
+    @Test (expected = ClassCastException.class)
+    public void testThatWeCantSetDifferentTypeOfElement() {
+
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantSetElementByIndexMoreThenSize() {
+
+    }
+
 
     private void fillList() {
         list.add("aa0a");

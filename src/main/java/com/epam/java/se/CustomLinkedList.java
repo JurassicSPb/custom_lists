@@ -40,21 +40,6 @@ public class CustomLinkedList<T> implements List<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T1> T1[] toArray(T1[] a) {
-        return null;
-    }
-
-    @Override
     public boolean add(T t) {
         Node<T> iterator = head;
         while (iterator.hasNext()) {
@@ -62,7 +47,7 @@ public class CustomLinkedList<T> implements List<T> {
         }
         iterator.next = new Node<>(t);
         size++;
-        return false;
+        return true;
     }
 
     @Override
@@ -82,49 +67,9 @@ public class CustomLinkedList<T> implements List<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
     public void clear() {
         head = new Node<>(null);
         size = 0;
-    }
-
-    @Override
-    public T get(int index) {
-        return getNodeByIndex(index).value;
-    }
-
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
     }
 
     @Override
@@ -134,6 +79,40 @@ public class CustomLinkedList<T> implements List<T> {
         T value = current.next.value;
         current.next = current.next.next;
         return value;
+    }
+
+    @Override
+    public T get(int index) {
+        return getNodeByIndex(index).value;
+    }
+
+    @Override
+    public T set(int index, T element) {
+        Node<T> node = getNodeByIndex(index);
+        T oldValue = node.value;
+        node.value = element;
+
+        return oldValue;
+    }
+
+    @Override
+    public void add(int index, T element) {
+
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
     }
 
     @Override
@@ -159,6 +138,31 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
     }
 
     private Node<T> getNodeByIndex(int index) {
