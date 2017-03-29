@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -167,6 +168,35 @@ public class CustomListsTest {
         list.set(33, "cccc");
     }
 
+    @Test
+    public void testThatWeCanAddByIndex() throws Exception {
+        fillList();
+
+        list.add(2, "hey");
+
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i));
+
+//            assertThat(list.get(2), is("hey"));
+//            assertThat(list.get(3), is("aa2a"));
+//            assertThat(list.size(), is(7));
+//        }
+
+    }
+
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantAddElementByIndexMoreThenSize() {
+        list.add(12, "aa2a");
+
+    }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantRemoveElementByIndexMoreThenSize() {
+        fillList();
+
+        list.remove(8);
+
+    }
 
     private void fillList() {
         list.add("aa0a");

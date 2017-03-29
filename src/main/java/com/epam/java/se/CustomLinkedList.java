@@ -97,7 +97,20 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
+        Node<T> current = getNodeByIndex(index);
+        Node<T> next = current.next;
+        size++;
 
+        next.value = current.value;
+        current.value = element;
+
+        System.out.println(current.next.value);
+//        while (next != null) {
+//            next.value = current.value;
+//            current.value = element;
+//            current.next = next;
+//            next = current.next.next;
+//        }
     }
 
     @Override
