@@ -155,17 +155,16 @@ public class CustomListsTest {
 
     @Test
     public void testThatSetMethodReturnsPreviousValue() throws Exception {
+        fillList();
 
-    }
-
-    @Test (expected = ClassCastException.class)
-    public void testThatWeCantSetDifferentTypeOfElement() {
-
+        assertThat(list.set(3, "cccc"), is("ssss"));
     }
 
     @Test (expected = IndexOutOfBoundsException.class)
     public void testThatWeCantSetElementByIndexMoreThenSize() {
+        fillList();
 
+        list.set(33, "cccc");
     }
 
 
