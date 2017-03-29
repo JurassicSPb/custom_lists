@@ -145,6 +145,7 @@ public class CustomListsTest {
 
         assertFalse(list.remove("sadasdasd"));
     }
+
     @Test
     public void testThatWeCanSetNewElementOnPosition() throws Exception {
         fillList();
@@ -161,7 +162,7 @@ public class CustomListsTest {
         assertThat(list.set(3, "cccc"), is("ssss"));
     }
 
-    @Test (expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testThatWeCantSetElementByIndexMoreThenSize() {
         fillList();
 
@@ -174,23 +175,23 @@ public class CustomListsTest {
 
         list.add(2, "hey");
 
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
 
-//            assertThat(list.get(2), is("hey"));
-//            assertThat(list.get(3), is("aa2a"));
-//            assertThat(list.size(), is(7));
-//        }
-
+        assertThat(list.get(2), is("hey"));
+        assertThat(list.get(3), is("aa2a"));
+        assertThat(list.size(), is(7));
     }
 
 
-    @Test (expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testThatWeCantAddElementByIndexMoreThenSize() {
         list.add(12, "aa2a");
 
     }
-    @Test (expected = IndexOutOfBoundsException.class)
+
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testThatWeCantRemoveElementByIndexMoreThenSize() {
         fillList();
 
