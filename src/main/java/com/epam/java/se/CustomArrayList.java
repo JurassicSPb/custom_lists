@@ -126,6 +126,21 @@ public class CustomArrayList<T> implements List<T> {
     }
 
     @Override
+    public int indexOf(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == null) {
+                if (o == null) {
+                    return i;
+                }
+            } else if (data[i].equals(o)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    @Override
     public Object[] toArray() {
         return new Object[0];
     }
@@ -158,11 +173,6 @@ public class CustomArrayList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
     }
 
     @Override

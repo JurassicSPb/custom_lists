@@ -127,6 +127,25 @@ public class CustomLinkedList<T> implements List<T> {
     }
 
     @Override
+    public int indexOf(Object o) {
+        Node<T> node = head;
+        int index=0;
+        while (node.hasNext()) {
+            node = node.next;
+            if (node.value == null) {
+                if (o == null) {
+                    return index;
+                }
+            } else if (node.value.equals(o)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+
+    @Override
     public Iterator<T> iterator() {
         return null;
     }
@@ -139,11 +158,6 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public <T1> T1[] toArray(T1[] a) {
         return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
     }
 
     @Override

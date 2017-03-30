@@ -66,7 +66,7 @@ public class CustomListsTest {
 
     @Test
     public void testThatListContainsNullIfItWasAdded() {
-
+        list.add("fff");
         list.add(null);
 
         assertTrue(list.contains(null));
@@ -195,11 +195,12 @@ public class CustomListsTest {
         list.remove(8);
 
     }
+
     @Test
-    public void testThatWeCanGetASublistFromList(){
+    public void testThatWeCanGetASublistFromList() {
         fillList();
 
-        List <String> testList = list.subList(2, 5);
+        List<String> testList = list.subList(2, 5);
 
         assertThat(testList.get(0), is("aa2a"));
         assertThat(testList.get(1), is("ssss"));
@@ -209,9 +210,8 @@ public class CustomListsTest {
     }
 
 
-
-    @Test (expected = IndexOutOfBoundsException.class)
-    public void testThatWeCantGetSublistByIndexMoreThenSizeOrLessThanZeroOrIfStartIndexIsLessThanEndIndex(){
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantGetSublistByIndexMoreThenSizeOrLessThanZeroOrIfStartIndexIsLessThanEndIndex() {
         fillList();
 
         list.subList(-1, 3);
@@ -220,7 +220,31 @@ public class CustomListsTest {
 
 
     }
-    
+
+    @Test
+    public void testThatWeCanCheckIndexOfMethod() {
+        fillList();
+
+        assertThat(list.indexOf("ssss"), is(3));
+    }
+
+    @Test
+    public void testThatIfWeAddNullValueIndexOfWillWorkCorrectly() {
+        list.add("aa0a");
+        list.add("aa1a");
+        list.add(null);
+
+        assertThat(list.indexOf(null), is(2));
+    }
+
+    @Test
+    public void testThatIfThereIsNoMatchesInIndexOfMethodWillReturnMinusOne() {
+        fillList();
+
+        assertThat(list.indexOf("test"), is(-1));
+    }
+
+
     private void fillList() {
         list.add("aa0a");
         list.add("aa1a");
