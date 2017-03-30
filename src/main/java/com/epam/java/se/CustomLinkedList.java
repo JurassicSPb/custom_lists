@@ -165,7 +165,7 @@ public class CustomLinkedList<T> implements List<T> {
         Object[] array = new Object[size];
         Node<T> node = head.next;
         for (int i = 0; i < size; i++) {
-            array[i]=node.value;
+            array[i] = node.value;
             node = node.next;
         }
         return array;
@@ -176,10 +176,10 @@ public class CustomLinkedList<T> implements List<T> {
         Object[] array = new Object[size];
         Node<T> node = head.next;
         for (int i = 0; i < size; i++) {
-            array[i]=node.value;
+            array[i] = node.value;
             node = node.next;
         }
-        return (T1[])array;
+        return (T1[]) array;
     }
 
     @Override
@@ -196,12 +196,23 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        boolean wasAdded = false;
+        for (Object element : c) {
+            if (this.add((T) element)) {
+                wasAdded = true;
+            }
+        }
+        return wasAdded;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        boolean wasAdded = false;
+        for (Object element : c) {
+            this.add(index, (T) element);
+            wasAdded = true;
+        }
+        return wasAdded;
     }
 
     @Override

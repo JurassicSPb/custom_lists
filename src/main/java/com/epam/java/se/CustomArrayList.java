@@ -167,7 +167,7 @@ public class CustomArrayList<T> implements List<T> {
     public boolean containsAll(Collection<?> c) {
         boolean isContaining = true;
         for (Object element : c) {
-            if (!this.contains(element)) {
+            if (!contains(element)) {
                 isContaining = false;
                 break;
             }
@@ -177,12 +177,26 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        boolean wasAdded = false;
+        for (Object element : c) {
+            if (add((T) element)) {
+                wasAdded = true;
+            }
+        }
+        return wasAdded;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        boolean wasAdded = false;
+        for (Object element : c) {
+            add(index, (T) element);
+            wasAdded = true;
+        }
+        return wasAdded;
     }
 
     @Override

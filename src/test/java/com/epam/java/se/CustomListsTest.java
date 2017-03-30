@@ -272,7 +272,7 @@ public class CustomListsTest {
     public void testThatWeCanAddDataToAnotherArray() {
         fillList();
 
-        Object [] testArray = list.toArray();
+        Object[] testArray = list.toArray();
 
         Object[] testArray2 = list.toArray(new String[list.size()]);
 
@@ -312,6 +312,49 @@ public class CustomListsTest {
         arr.add(null);
 
         assertThat(list.containsAll(arr), is(false));
+    }
+
+    @Test
+    public void testThatWeCanAddAllFromOtherCollection() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("ssss");
+        arr.add("aavv1a");
+        arr.add("aa2a");
+
+        assertThat(list.addAll(arr), is(true));
+        for (int i = 0; i < list.size(); i++) {
+            assertThat(list.get(2), is("aa2a"));
+            assertThat(list.get(9), is("aa2a"));
+        }
+    }
+
+    @Test
+    public void testThatWeCanAddAllFromOtherCollectionByIndex() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("aaa");
+        arr.add("bbb");
+        arr.add("ccc");
+
+        assertThat(list.addAll(2, arr), is(true));
+        for (int i = 0; i < list.size(); i++) {
+            assertThat(list.get(2), is("ccc"));
+            assertThat(list.get(9), is("aa4a"));
+        }
+    }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantAddAllFromOtherCollectionByIndexMoreThenSize() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("aaa");
+        arr.add("bbb");
+        arr.add("ccc");
+
+        assertThat(list.addAll(3424, arr), is(false));
     }
 
     private void fillList() {
