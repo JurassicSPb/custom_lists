@@ -201,7 +201,13 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        boolean wasRemoved = false;
+        for (Object element : c) {
+            if (remove((T) element)) {
+                wasRemoved = true;
+            }
+        }
+        return wasRemoved;
     }
 
     @Override

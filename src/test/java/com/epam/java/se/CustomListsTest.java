@@ -345,7 +345,8 @@ public class CustomListsTest {
             assertThat(list.get(9), is("aa4a"));
         }
     }
-    @Test (expected = IndexOutOfBoundsException.class)
+
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testThatWeCantAddAllFromOtherCollectionByIndexMoreThenSize() {
         fillList();
 
@@ -355,6 +356,32 @@ public class CustomListsTest {
         arr.add("ccc");
 
         assertThat(list.addAll(3424, arr), is(false));
+    }
+
+    @Test
+    public void testThatWeCanRemoveAllFromOtherCollection() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("aa0a");
+        arr.add("ssss");
+        arr.add("aa2a");
+
+        assertThat(list.removeAll(arr), is(true));
+        for (int i = 0; i < list.size(); i++) {
+            assertFalse(list.contains("aa0a"));
+            assertFalse(list.contains("ssss"));
+        }
+    }
+
+    @Test
+    public void testThatWeCantRemoveAllFromAnotherCollectionIfThereIsNoSuchElementInOurList() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("rrrrrrr");
+
+        assertThat(list.removeAll(arr), is(false));
     }
 
     private void fillList() {
