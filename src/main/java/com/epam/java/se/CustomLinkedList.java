@@ -160,19 +160,30 @@ public class CustomLinkedList<T> implements List<T> {
         return -1;
     }
 
-
-    @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
-
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] array = new Object[size];
+        Node<T> node = head.next;
+        for (int i = 0; i < size; i++) {
+            array[i]=node.value;
+            node = node.next;
+        }
+        return array;
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
+        Object[] array = new Object[size];
+        Node<T> node = head.next;
+        for (int i = 0; i < size; i++) {
+            array[i]=node.value;
+            node = node.next;
+        }
+        return (T1[])array;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
         return null;
     }
 

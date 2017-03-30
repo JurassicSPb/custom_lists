@@ -268,6 +268,20 @@ public class CustomListsTest {
         assertThat(list.lastIndexOf("test"), is(-1));
     }
 
+    @Test
+    public void testThatWeCanAddDataToAnotherArray() {
+        fillList();
+
+        Object [] testArray = list.toArray();
+
+        Object[] testArray2 = list.toArray(new String[list.size()]);
+
+        for (int i = 0; i < testArray.length; i++) {
+            assertThat(testArray[2], is("aa2a"));
+            assertThat(testArray2[3], is("ssss"));
+        }
+    }
+
 
     private void fillList() {
         list.add("aa0a");

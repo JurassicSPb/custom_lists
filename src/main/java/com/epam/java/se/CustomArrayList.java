@@ -153,15 +153,14 @@ public class CustomArrayList<T> implements List<T> {
         return -1;
     }
 
-
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(data, size);
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        return (T1[]) Arrays.copyOf(data, size);
     }
 
     @Override
