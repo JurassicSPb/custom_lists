@@ -186,7 +186,7 @@ public class CustomLinkedList<T> implements List<T> {
     public boolean containsAll(Collection<?> c) {
         boolean isContaining = true;
         for (Object element : c) {
-            if (!this.contains(element)) {
+            if (!contains(element)) {
                 isContaining = false;
                 break;
             }
@@ -198,7 +198,7 @@ public class CustomLinkedList<T> implements List<T> {
     public boolean addAll(Collection<? extends T> c) {
         boolean wasAdded = false;
         for (Object element : c) {
-            if (this.add((T) element)) {
+            if (add((T) element)) {
                 wasAdded = true;
             }
         }
@@ -209,7 +209,7 @@ public class CustomLinkedList<T> implements List<T> {
     public boolean addAll(int index, Collection<? extends T> c) {
         boolean wasAdded = false;
         for (Object element : c) {
-            this.add(index, (T) element);
+            add(index, (T) element);
             wasAdded = true;
         }
         return wasAdded;
@@ -219,7 +219,7 @@ public class CustomLinkedList<T> implements List<T> {
     public boolean removeAll(Collection<?> c) {
         boolean wasRemoved = false;
         for (Object element : c) {
-            if (this.remove((T) element)) {
+            if (remove((T) element)) {
                 wasRemoved = true;
             }
         }
@@ -228,14 +228,23 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        boolean isRetained = false;
+        boolean wasRetained = false;
+        LinkedList<Object> buffer = new LinkedList<>();
+        int tempSize = 0;
+
         for (Object element : c) {
-            if (!contains(element)) {
-                remove(element);
-                isRetained = true;
+            if (contains(element)) {
+                buffer.add(element);
+                tempSize++;
+                wasRetained = true;
             }
         }
-        return isRetained;
+        clear();
+        for (Object element : buffer) {
+            add((T) element);
+        }
+        size = tempSize;
+        return wasRetained;
     }
 
     @Override

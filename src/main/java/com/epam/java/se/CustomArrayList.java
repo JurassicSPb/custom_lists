@@ -221,8 +221,8 @@ public class CustomArrayList<T> implements List<T> {
             if (c.contains(data[i])) {
                 temp[tempIndex++]= data[i];
                 tempSize++;
+                wasRetained = true;
             }
-            wasRetained = true;
         }
         data=temp;
         size=tempSize;
