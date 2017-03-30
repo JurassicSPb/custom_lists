@@ -229,20 +229,15 @@ public class CustomArrayList<T> implements List<T> {
         return wasRetained;
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return null;
     }
 
     @Override
-    public ListIterator<T> listIterator() {
-        return null;
-    }
+    public ListIterator<T> listIterator() {return null;}
 
     @Override
-    public ListIterator<T> listIterator(int index) {
-        return null;
-    }
+    public ListIterator<T> listIterator(int index) {return null;}
 
 }

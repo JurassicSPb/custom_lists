@@ -413,6 +413,30 @@ public class CustomListsTest {
         assertThat(list.retainAll(arr), is(false));
     }
 
+    @Test
+    public void iteratorTest() {
+        fillList();
+
+        Iterator<String> iter = list.iterator();
+        while (iter.hasNext()){
+            System.out.println(iter.next());
+        }
+
+    }
+
+    @Test
+    public void listIteratorTest() {
+        fillList();
+
+        ListIterator<String> iter = list.listIterator();
+        while (iter.hasNext()){
+            System.out.println(iter.next());
+            System.out.println(iter.nextIndex());
+//            System.out.println(iter.previous());
+//            System.out.println(iter.hasPrevious());
+        }
+    }
+
     private void fillList() {
         list.add("aa0a");
         list.add("aa1a");
