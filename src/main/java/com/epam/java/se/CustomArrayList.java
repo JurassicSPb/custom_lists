@@ -139,6 +139,20 @@ public class CustomArrayList<T> implements List<T> {
         return -1;
     }
 
+    @Override
+    public int lastIndexOf(Object o) {
+        for (int i = size-1; i >= 0; i--) {
+            if (data[i] == null) {
+                if (o == null) {
+                    return i;
+                }
+            } else if (data[i].equals(o)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     @Override
     public Object[] toArray() {
@@ -173,11 +187,6 @@ public class CustomArrayList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
     }
 
     @Override

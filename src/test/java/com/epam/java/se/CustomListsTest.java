@@ -118,10 +118,10 @@ public class CustomListsTest {
     public void testThatWeCanDeleteElementByIndex() throws Exception {
         fillList();
 
-        String removed = list.remove(2);
+        String removed = list.remove(3);
 
-        assertFalse(list.contains("aa2a"));
-        assertThat(removed, is(equalTo("aa2a")));
+        assertFalse(list.contains("ssss"));
+        assertThat(removed, is(equalTo("ssss")));
     }
 
     @Test
@@ -178,7 +178,7 @@ public class CustomListsTest {
 
         assertThat(list.get(2), is("hey"));
         assertThat(list.get(3), is("aa2a"));
-        assertThat(list.size(), is(7));
+        assertThat(list.size(), is(8));
     }
 
 
@@ -205,7 +205,7 @@ public class CustomListsTest {
         assertThat(testList.get(0), is("aa2a"));
         assertThat(testList.get(1), is("ssss"));
         assertThat(testList.get(2), is("aa3a"));
-        assertThat(testList.get(3), is("aa4a"));
+        assertThat(testList.get(3), is("aa2a"));
         assertThat(testList.size(), is(4));
     }
 
@@ -225,7 +225,7 @@ public class CustomListsTest {
     public void testThatWeCanCheckIndexOfMethod() {
         fillList();
 
-        assertThat(list.indexOf("ssss"), is(3));
+        assertThat(list.indexOf("aa2a"), is(2));
     }
 
     @Test
@@ -244,6 +244,30 @@ public class CustomListsTest {
         assertThat(list.indexOf("test"), is(-1));
     }
 
+    @Test
+    public void testThatWeCanCheckLastIndexOfMethod() {
+        fillList();
+
+        assertThat(list.lastIndexOf("aa2a"), is(5));
+        assertThat(list.lastIndexOf("aa0a"), is(0));
+    }
+
+    @Test
+    public void testThatIfWeAddNullValueLastIndexOfWillWorkCorrectly() {
+        list.add("aa0a");
+        list.add("aa1a");
+        list.add(null);
+
+        assertThat(list.lastIndexOf(null), is(2));
+    }
+
+    @Test
+    public void testThatIfThereIsNoMatchesInLastIndexOfMethodWillReturnMinusOne() {
+        fillList();
+
+        assertThat(list.lastIndexOf("test"), is(-1));
+    }
+
 
     private void fillList() {
         list.add("aa0a");
@@ -251,6 +275,7 @@ public class CustomListsTest {
         list.add("aa2a");
         list.add("ssss");
         list.add("aa3a");
+        list.add("aa2a");
         list.add("aa4a");
     }
 }
