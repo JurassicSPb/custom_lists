@@ -5,10 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.is;
@@ -198,7 +195,32 @@ public class CustomListsTest {
         list.remove(8);
 
     }
+    @Test
+    public void testThatWeCanGetASublistFromList(){
+        fillList();
 
+        List <String> testList = list.subList(2, 5);
+
+        assertThat(testList.get(0), is("aa2a"));
+        assertThat(testList.get(1), is("ssss"));
+        assertThat(testList.get(2), is("aa3a"));
+        assertThat(testList.get(3), is("aa4a"));
+        assertThat(testList.size(), is(4));
+    }
+
+
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testThatWeCantGetSublistByIndexMoreThenSizeOrLessThanZeroOrIfStartIndexIsLessThanEndIndex(){
+        fillList();
+
+        list.subList(-1, 3);
+        list.subList(2, 30);
+        list.subList(12, 8);
+
+
+    }
+    
     private void fillList() {
         list.add("aa0a");
         list.add("aa1a");

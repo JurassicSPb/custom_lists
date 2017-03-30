@@ -1,4 +1,5 @@
 package com.epam.java.se;
+
 import java.util.*;
 
 /**
@@ -77,7 +78,7 @@ public class CustomArrayList<T> implements List<T> {
         }
         int length = data.length - index;
         T value = (T) data[index];
-        System.arraycopy(data, index + 1, data, index, length-1);
+        System.arraycopy(data, index + 1, data, index, length - 1);
         size--;
         return value;
     }
@@ -99,14 +100,29 @@ public class CustomArrayList<T> implements List<T> {
             throw new IndexOutOfBoundsException();
         }
         int length = data.length - index;
-        System.arraycopy(data, index, data, index+1, length-1);
+        System.arraycopy(data, index, data, index + 1, length - 1);
         data[index] = element;
         size++;
     }
 
+    /**
+     * Returns a copy of original data in chosen diapason
+     *
+     * @param fromIndex start index (inclusive) of the subList
+     * @param toIndex   end index (exclusive) of the subList
+     * @return a view of the specified range within this list
+     */
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        if (fromIndex < 0 || fromIndex >= size || fromIndex > toIndex) {
+            if (toIndex < 0 || toIndex >= size) {
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        int length = toIndex-fromIndex+1;
+        T[] subListData = (T[]) new Object[length];
+        System.arraycopy(data, fromIndex, subListData, 0, length);
+        return Arrays.asList(subListData);
     }
 
     @Override

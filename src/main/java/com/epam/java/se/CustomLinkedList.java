@@ -1,9 +1,6 @@
 package com.epam.java.se;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by Мария on 29.03.2017.
@@ -97,11 +94,36 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        Node<T> prev = getNodeByIndex(index-1);
+        Node<T> prev = getNodeByIndex(index - 1);
         Node<T> current = prev.next;
         prev.next = new Node<>(element);
         prev.next.next = current;
         size++;
+    }
+
+    /**
+     * Returns a copy of original data in chosen diapason
+     *
+     * @param fromIndex start index (inclusive) of the subList
+     * @param toIndex   end index (exclusive) of the subList
+     * @return a view of the specified range within this list
+     */
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        if (fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException();
+        }
+        int count = fromIndex;
+        Node<T> startNode = getNodeByIndex(fromIndex);
+        List<T> newList = new LinkedList<>();
+        while (startNode != null) {
+            if (count <= toIndex) {
+                newList.add(startNode.value);
+            }
+            startNode = startNode.next;
+            count++;
+        }
+        return newList;
     }
 
     @Override
@@ -136,11 +158,6 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
 
