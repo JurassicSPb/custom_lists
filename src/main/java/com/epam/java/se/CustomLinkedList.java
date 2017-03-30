@@ -183,23 +183,15 @@ public class CustomLinkedList<T> implements List<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator<T> listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return null;
-    }
-
-    @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean isContaining = true;
+        for (Object element : c) {
+            if (!this.contains(element)) {
+                isContaining = false;
+                break;
+            }
+        }
+        return isContaining;
     }
 
     @Override
@@ -220,6 +212,21 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return null;
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return null;
     }
 
     private Node<T> getNodeByIndex(int index) {

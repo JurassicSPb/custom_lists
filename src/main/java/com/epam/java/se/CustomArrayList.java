@@ -119,7 +119,7 @@ public class CustomArrayList<T> implements List<T> {
                 throw new IndexOutOfBoundsException();
             }
         }
-        int length = toIndex-fromIndex+1;
+        int length = toIndex - fromIndex + 1;
         T[] subListData = (T[]) new Object[length];
         System.arraycopy(data, fromIndex, subListData, 0, length);
         return Arrays.asList(subListData);
@@ -141,7 +141,7 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = size-1; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             if (data[i] == null) {
                 if (o == null) {
                     return i;
@@ -165,7 +165,14 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean isContaining = true;
+        for (Object element : c) {
+            if (!this.contains(element)) {
+                isContaining = false;
+                break;
+            }
+        }
+        return isContaining;
     }
 
     @Override

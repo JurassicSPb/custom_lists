@@ -282,6 +282,37 @@ public class CustomListsTest {
         }
     }
 
+    @Test
+    public void testThatIfOurListContainsAllElementsOfTheOtherCollectionWillReturnTrue() {
+        fillList();
+
+        ArrayList<String> str = new ArrayList<>();
+        str.add("ssss");
+        str.add("aa1a");
+        str.add("aa2a");
+        assertThat(list.containsAll(str), is(true));
+
+    }
+
+    @Test
+    public void testThatIfOurListNotContainsAllElementsOfTheOtherCollectionWillReturnFalse() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("ssss");
+        arr.add("aavv1a");
+        arr.add("aa2a");
+        assertThat(list.containsAll(arr), is(false));
+
+    }
+
+    @Test
+    public void testThatIfAnotherCollectionContainsNullOrOtherElementsTypeWillReturnFalse() {
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(null);
+
+        assertThat(list.containsAll(arr), is(false));
+    }
 
     private void fillList() {
         list.add("aa0a");
