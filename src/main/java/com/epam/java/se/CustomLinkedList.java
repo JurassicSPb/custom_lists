@@ -228,7 +228,14 @@ public class CustomLinkedList<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        boolean isRetained = false;
+        for (Object element : c) {
+            if (!contains(element)) {
+                remove(element);
+                isRetained = true;
+            }
+        }
+        return isRetained;
     }
 
     @Override

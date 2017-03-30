@@ -212,8 +212,23 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        boolean wasRetained = false;
+        Object[] temp = new Object[CAPACITY];
+        int tempSize = 0;
+        int tempIndex = 0;
+
+        for (int i=0; i < size; i++) {
+            if (c.contains(data[i])) {
+                temp[tempIndex++]= data[i];
+                tempSize++;
+            }
+            wasRetained = true;
+        }
+        data=temp;
+        size=tempSize;
+        return wasRetained;
     }
+
 
     @Override
     public Iterator<T> iterator() {

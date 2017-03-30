@@ -384,6 +384,27 @@ public class CustomListsTest {
         assertThat(list.removeAll(arr), is(false));
     }
 
+    @Test
+    public void testThatWeCanRetainAllFromOtherCollection() {
+        fillList();
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add("aa0a");
+        arr.add("ssss");
+        arr.add("aa2a");
+
+        list.retainAll(arr);
+//        assertThat(list.retainAll(arr), is(true));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
+    @Test
+    public void testThatWeCantRetainAllFromAnotherCollectionIfThereIsNoSuchElementInOurList() {
+
+    }
+
     private void fillList() {
         list.add("aa0a");
         list.add("aa1a");
