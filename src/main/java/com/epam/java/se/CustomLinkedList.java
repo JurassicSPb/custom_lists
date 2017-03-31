@@ -333,7 +333,7 @@ public class CustomLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         boolean wasRetained = false;
-        LinkedList<Object> buffer = new LinkedList<>();
+        List<Object> buffer = new CustomLinkedList<>();
         int tempSize = 0;
 
         for (Object element : c) {
