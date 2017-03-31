@@ -205,15 +205,15 @@ public class CustomArrayList<T> implements List<T> {
         int tempSize = 0;
         int tempIndex = 0;
 
-        for (int i=0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (c.contains(data[i])) {
-                temp[tempIndex++]= data[i];
+                temp[tempIndex++] = data[i];
                 tempSize++;
                 wasRetained = true;
             }
         }
-        data=temp;
-        size=tempSize;
+        data = temp;
+        size = tempSize;
         return wasRetained;
     }
 
@@ -225,13 +225,86 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            int cursor = 0;
+
+            @Override
+            public void remove() {
+                CustomArrayList.this.remove(cursor--);
+            }
+
+            @Override
+            public boolean hasNext() {
+                return cursor != size;
+            }
+
+            @Override
+            public T next() {
+                return (T) data[cursor++];
+            }
+        };
     }
 
     @Override
-    public ListIterator<T> listIterator() {return null;}
+    public ListIterator<T> listIterator() {
+        return listIterator(0);
+    }
 
     @Override
-    public ListIterator<T> listIterator(int index) {return null;}
+    public ListIterator<T> listIterator(int index) {
+        return new ListIterator<T>() {
+            int cursor = index;
 
+            @Override
+            public boolean hasNext() {
+                return cursor != size;
+            }
+
+            @Override
+            public T next() {
+                return (T) data[cursor++];
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                return cursor != 0;
+            }
+
+            @Override
+            public T previous() {
+                return (T) data[cursor--];
+            }
+
+            @Override
+            public int nextIndex() {
+                if (cursor == 0) {
+                    return -1;
+                }
+                return cursor + 1;
+            }
+
+            @Override
+            public int previousIndex() {
+                if (cursor == 0) {
+                    return -1;
+                }
+                return cursor - 1;
+            }
+
+            @Override
+            public void remove() {
+                CustomArrayList.this.remove(cursor--);
+            }
+
+            @Override
+            public void set(T t) {
+                CustomArrayList.this.set(cursor, t);
+            }
+
+            @Override
+            public void add(T t) {
+                CustomArrayList.this.add(cursor++, t);
+            }
+        };
+    }
 }

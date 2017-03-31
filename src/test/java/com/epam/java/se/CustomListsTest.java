@@ -418,11 +418,13 @@ public class CustomListsTest {
         fillList();
 
         Iterator<String> iter = list.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
+            iter.next();
+            assertThat(iter.hasNext(), is(true));
+            assertThat(iter.next(), is("aa1a"));
+            iter.next();
+            iter.remove();
+            assertThat(list.contains("ssss"), is(false));
         }
-
-    }
 
     @Test
     public void listIteratorTest() {

@@ -261,6 +261,11 @@ public class CustomLinkedList<T> implements List<T> {
             public T next() {
                 return getNodeByIndex(cursor++).value;
             }
+
+            @Override
+            public void remove() {
+                CustomLinkedList.this.remove(cursor--);
+            }
         };
     }
 
@@ -276,7 +281,7 @@ public class CustomLinkedList<T> implements List<T> {
 
             @Override
             public boolean hasNext() {
-                return cursor < size;
+                return cursor != size;
             }
 
             @Override
