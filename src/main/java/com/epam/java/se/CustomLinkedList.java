@@ -169,7 +169,7 @@ public class CustomLinkedList<T> implements List<T> {
         }
         int count = fromIndex;
         Node<T> startNode = getNodeByIndex(fromIndex);
-        List<T> newList = new LinkedList<>();
+        List<T> newList = new CustomLinkedList<>();
         while (startNode != null) {
             if (count <= toIndex) {
                 newList.add(startNode.value);
