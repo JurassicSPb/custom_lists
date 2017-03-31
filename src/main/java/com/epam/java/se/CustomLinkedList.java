@@ -251,9 +251,10 @@ public class CustomLinkedList<T> implements List<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             int cursor = 0;
+
             @Override
             public boolean hasNext() {
-                return cursor!=size;
+                return cursor != size;
             }
 
             @Override
@@ -264,12 +265,18 @@ public class CustomLinkedList<T> implements List<T> {
     }
 
     @Override
-    public ListIterator<T> listIterator(){
+    public ListIterator<T> listIterator() {
+        return listIterator(0);
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
         return new ListIterator<T>() {
-            int cursor = 0;
+            int cursor = index;
+
             @Override
             public boolean hasNext() {
-                return cursor!=size;
+                return cursor < size;
             }
 
             @Override
@@ -279,7 +286,7 @@ public class CustomLinkedList<T> implements List<T> {
 
             @Override
             public boolean hasPrevious() {
-                return cursor!=0;
+                return cursor != 0;
             }
 
             @Override
@@ -289,40 +296,35 @@ public class CustomLinkedList<T> implements List<T> {
 
             @Override
             public int nextIndex() {
-                if (cursor==0){
+                if (cursor == 0) {
                     return -1;
                 }
-                return cursor+1;
+                return cursor + 1;
             }
 
             @Override
             public int previousIndex() {
-                if (cursor==0){
+                if (cursor == 0) {
                     return -1;
                 }
-                return cursor-1;
+                return cursor - 1;
             }
 
             @Override
             public void remove() {
-                CustomLinkedList.this.remove(getNodeByIndex(cursor));
+                CustomLinkedList.this.remove(cursor--);
             }
 
             @Override
             public void set(T t) {
-                getNodeByIndex(cursor).value=t;
+                getNodeByIndex(cursor).value = t;
             }
 
             @Override
             public void add(T t) {
-                CustomLinkedList.this.add(cursor, t);
+                CustomLinkedList.this.add(cursor++, t);
             }
         };
-    }
-
-    @Override
-    public ListIterator<T> listIterator(int index) {
-        return null;
     }
 
     private Node<T> getNodeByIndex(int index) {

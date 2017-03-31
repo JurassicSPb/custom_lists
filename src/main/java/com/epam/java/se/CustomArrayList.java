@@ -65,17 +65,13 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        boundsCheck(index);
         return (T) data[index];
     }
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        boundsCheck(index);
         int length = data.length - index;
         T value = (T) data[index];
         System.arraycopy(data, index + 1, data, index, length - 1);
@@ -85,9 +81,7 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public T set(int index, T element) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        boundsCheck(index);
         T oldValue = (T) data[index];
         data[index] = element;
 
@@ -96,9 +90,7 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        boundsCheck(index);
         int length = data.length - index;
         System.arraycopy(data, index, data, index + 1, length - 1);
         data[index] = element;
@@ -115,9 +107,7 @@ public class CustomArrayList<T> implements List<T> {
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         if (fromIndex < 0 || fromIndex >= size || fromIndex > toIndex) {
-            if (toIndex < 0 || toIndex >= size) {
-                throw new IndexOutOfBoundsException();
-            }
+            boundsCheck(toIndex);
         }
         int length = toIndex - fromIndex + 1;
         T[] subListData = (T[]) new Object[length];
@@ -188,9 +178,7 @@ public class CustomArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        boundsCheck(index);
         boolean wasAdded = false;
         for (Object element : c) {
             add(index, (T) element);
@@ -227,6 +215,12 @@ public class CustomArrayList<T> implements List<T> {
         data=temp;
         size=tempSize;
         return wasRetained;
+    }
+
+    private void boundsCheck(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     @Override

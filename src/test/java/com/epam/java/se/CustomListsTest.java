@@ -418,7 +418,7 @@ public class CustomListsTest {
         fillList();
 
         Iterator<String> iter = list.iterator();
-        while (iter.hasNext()){
+        while (iter.hasNext()) {
             System.out.println(iter.next());
         }
 
@@ -429,14 +429,71 @@ public class CustomListsTest {
         fillList();
 
         ListIterator<String> iter = list.listIterator();
-        while (iter.hasNext()){
-            System.out.println(iter.next());
-            System.out.println(iter.nextIndex());
-//            System.out.println(iter.previous());
-//            System.out.println(iter.hasPrevious());
+        iter.next();
+        assertThat(iter.hasNext(), is(true));
+        iter.set("ddd");
+        assertThat(list.contains("ddd"), is(true));
+        assertThat(list.contains("aa1a"), is(false));
+        iter.add("zzz");
+        assertThat(list.contains("zzz"), is(true));
+        iter.next();
+        assertThat(iter.hasNext(), is(true));
+        assertThat(iter.nextIndex(), is(4));
+        assertThat(iter.hasPrevious(), is(true));
+        assertThat(iter.previousIndex(), is(2));
+        iter.previous();
+        assertThat(iter.previousIndex(), is(1));
+        iter.next();
+        iter.remove();
+        assertThat(list.contains("aa1a"), is(false));
+
+    }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void listIteratorTestLessThanSize() {
+        fillList();
+
+        ListIterator<String> iter = list.listIterator();
+
+        iter.previous();
+        iter.previous();
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void listIteratorTestMoreThanSize() {
+        fillList();
+
+        ListIterator<String> iter = list.listIterator();
+
+        while (true){
+            iter.next();
         }
     }
 
+    @Test
+    public void listIteratorTestByIndex() {
+        fillList();
+
+        ListIterator<String> iter = list.listIterator(3);
+        assertThat(iter.hasNext(), is(true));
+        iter.next();
+        iter.add("zzz");
+        iter.remove();
+        assertThat(list.contains("aa3a"), is(false));
+        assertThat(iter.hasPrevious(), is(true));
+        assertThat(iter.previousIndex(), is(3));
+        iter.set("vvv");
+        assertThat(list.contains("vvv"), is(true));
+
+    }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void listIteratorTestByIndexOutOfBounds() {
+        fillList();
+
+        ListIterator<String> iter = list.listIterator(20);
+        iter.next();
+
+    }
     private void fillList() {
         list.add("aa0a");
         list.add("aa1a");
