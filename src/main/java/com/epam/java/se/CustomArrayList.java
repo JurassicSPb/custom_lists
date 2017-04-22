@@ -75,6 +75,7 @@ public class CustomArrayList<T> implements List<T> {
         for (int i = 0; i < size; i++) {
             if (o.equals(data[i])) {
                 remove(i);
+                size--;
                 return true;
             }
         }
